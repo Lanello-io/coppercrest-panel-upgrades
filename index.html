@@ -1,1336 +1,1504 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Is Your Electrical Panel a Hidden Hazard? | Copper Crest Electric</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --indigo: #1e1b4b;
-      --indigo-deep: #0f0d2e;
-      --indigo-mid: #2d2a6e;
-      --copper: #b5651d;
-      --copper-bright: #d4813a;
-      --copper-glow: #f0a050;
-      --copper-pale: #f5c990;
-      --cream: #faf6ef;
-      --white: #ffffff;
-      --danger: #c0392b;
-      --danger-bright: #e74c3c;
-      --text-muted: #9490c0;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--indigo-deep);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(15, 13, 46, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(181, 101, 29, 0.2);
-    }
-
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.12em;
-      color: var(--copper-bright);
-      text-decoration: none;
-    }
-
-    .nav-logo span {
-      color: var(--cream);
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--copper);
-      color: var(--white);
-      padding: 10px 22px;
-      border-radius: 3px;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .nav-cta:hover {
-      background: var(--copper-bright);
-      transform: translateY(-1px);
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      overflow: hidden;
-      padding: 100px 0 60px;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(181, 101, 29, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 80% at 20% 30%, rgba(45, 42, 110, 0.8) 0%, transparent 70%),
-        linear-gradient(160deg, var(--indigo-deep) 0%, #1a1640 100%);
-    }
-
-    /* Animated circuit lines */
-    .circuit-lines {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .circuit-lines svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.07;
-    }
-
-    /* Warning stripe top */
-    .warning-stripe {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: repeating-linear-gradient(90deg,
-          var(--danger-bright) 0px, var(--danger-bright) 20px,
-          transparent 20px, transparent 30px);
-      animation: stripeScroll 3s linear infinite;
-    }
-
-    @keyframes stripeScroll {
-      from {
-        background-position: 0 0;
-      }
-
-      to {
-        background-position: 60px 0;
-      }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 60px 48px 60px 80px;
-      animation: fadeUp 0.9s ease both;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(192, 57, 43, 0.15);
-      border: 1px solid rgba(231, 76, 60, 0.4);
-      border-radius: 2px;
-      padding: 6px 14px;
-      margin-bottom: 28px;
-    }
-
-    .hero-eyebrow .dot {
-      width: 8px;
-      height: 8px;
-      background: var(--danger-bright);
-      border-radius: 50%;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.5;
-        transform: scale(0.7);
-      }
-    }
-
-    .hero-eyebrow span {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--danger-bright);
-    }
-
-    h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.2rem, 6vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      margin-bottom: 28px;
-      color: var(--cream);
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--copper-glow);
-      display: block;
-    }
-
-    h1 .danger-word {
-      color: var(--danger-bright);
-      position: relative;
-    }
-
-    .hero-body {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: rgba(250, 246, 239, 0.75);
-      max-width: 480px;
-      margin-bottom: 40px;
-      font-weight: 300;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--copper), var(--copper-bright));
-      color: var(--white);
-      padding: 16px 32px;
-      border-radius: 3px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      transition: all 0.25s;
-      box-shadow: 0 8px 32px rgba(181, 101, 29, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(181, 101, 29, 0.5);
-      background: linear-gradient(135deg, var(--copper-bright), var(--copper-glow));
-    }
-
-    .btn-secondary {
-      color: var(--copper-pale);
-      font-size: 0.9rem;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border-bottom: 1px solid rgba(181, 101, 29, 0.3);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .btn-secondary:hover {
-      color: var(--copper-glow);
-      border-color: var(--copper-glow);
-    }
-
-    /* Hero right panel */
-    .hero-panel {
-      position: relative;
-      z-index: 2;
-      padding: 60px 80px 60px 20px;
-      animation: fadeUp 0.9s 0.2s ease both;
-    }
-
-    .panel-card {
-      background: linear-gradient(145deg, rgba(45, 42, 110, 0.6), rgba(15, 13, 46, 0.8));
-      border: 1px solid rgba(181, 101, 29, 0.25);
-      border-radius: 8px;
-      padding: 36px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(181, 101, 29, 0.15);
-    }
-
-    .panel-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.1em;
-      color: var(--copper-glow);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .panel-title .icon {
-      width: 28px;
-      height: 28px;
-      background: rgba(192, 57, 43, 0.2);
-      border: 1px solid rgba(231, 76, 60, 0.4);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-    }
-
-    .warning-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .warning-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .warning-list li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .warning-icon {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
-      background: rgba(192, 57, 43, 0.15);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-    }
-
-    .warning-text strong {
-      display: block;
-      color: var(--cream);
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-
-    .warning-text p {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      line-height: 1.5;
-      font-weight: 300;
-    }
-
-    /* ── STATS BAND ── */
-    .stats-band {
-      position: relative;
-      z-index: 2;
-      background: linear-gradient(135deg, var(--copper) 0%, var(--copper-bright) 100%);
-      padding: 40px 80px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 20px 30px;
-      border-right: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .stat-item:last-child {
-      border-right: none;
-    }
-
-    .stat-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.2rem;
-      letter-spacing: 0.03em;
-      color: white;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    /* ── SIGNS SECTION ── */
-    .signs-section {
-      position: relative;
-      z-index: 2;
-      padding: 100px 80px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: end;
-      margin-bottom: 64px;
-    }
-
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--copper-bright);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-label::before {
-      content: '';
-      display: inline-block;
-      width: 30px;
-      height: 1px;
-      background: var(--copper-bright);
-    }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.2;
-      color: var(--cream);
-      font-weight: 700;
-    }
-
-    h2 em {
-      font-style: italic;
-      color: var(--copper-glow);
-    }
-
-    .section-desc {
-      color: rgba(250, 246, 239, 0.65);
-      font-size: 1rem;
-      line-height: 1.7;
-      font-weight: 300;
-      align-self: end;
-    }
-
-    .signs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .sign-card {
-      background: linear-gradient(160deg, rgba(45, 42, 110, 0.35), rgba(15, 13, 46, 0.5));
-      border: 1px solid rgba(181, 101, 29, 0.15);
-      border-radius: 8px;
-      padding: 32px;
-      transition: all 0.3s;
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sign-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--copper), var(--copper-glow));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s ease;
-    }
-
-    .sign-card:hover {
-      border-color: rgba(181, 101, 29, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .sign-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .sign-card-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.5rem;
-      color: rgba(181, 101, 29, 0.15);
-      line-height: 1;
-      margin-bottom: -10px;
-    }
-
-    .sign-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--cream);
-      font-weight: 700;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .sign-card-body {
-      font-size: 0.85rem;
-      line-height: 1.65;
-      color: rgba(250, 246, 239, 0.6);
-      font-weight: 300;
-    }
-
-    .sign-tag {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--danger-bright);
-      background: rgba(192, 57, 43, 0.15);
-      border-radius: 2px;
-      padding: 4px 10px;
-    }
-
-    /* ── BRANDS SECTION ── */
-    .brands-section {
-      position: relative;
-      z-index: 2;
-      background: rgba(45, 42, 110, 0.2);
-      border-top: 1px solid rgba(181, 101, 29, 0.1);
-      border-bottom: 1px solid rgba(181, 101, 29, 0.1);
-      padding: 80px;
-    }
-
-    .brands-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .brands-content .section-label {
-      margin-bottom: 20px;
-    }
-
-    .brands-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .brand-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: rgba(15, 13, 46, 0.5);
-      border: 1px solid rgba(181, 101, 29, 0.12);
-      border-radius: 6px;
-      transition: border-color 0.25s;
-    }
-
-    .brand-row:hover {
-      border-color: rgba(181, 101, 29, 0.35);
-    }
-
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      background: rgba(192, 57, 43, 0.15);
-      border: 1px solid rgba(231, 76, 60, 0.3);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .brand-name {
-      font-weight: 500;
-      color: var(--cream);
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-    }
-
-    .brand-reason {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 300;
-    }
-
-    .brand-badge {
-      margin-left: auto;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 2px;
-      background: rgba(192, 57, 43, 0.2);
-      color: var(--danger-bright);
-      border: 1px solid rgba(231, 76, 60, 0.3);
-      white-space: nowrap;
-    }
-
-    /* Risk meter visual */
-    .risk-visual {
-      background: linear-gradient(160deg, rgba(45, 42, 110, 0.4), rgba(15, 13, 46, 0.6));
-      border: 1px solid rgba(181, 101, 29, 0.2);
-      border-radius: 12px;
-      padding: 40px;
-    }
-
-    .risk-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.12em;
-      color: var(--copper-glow);
-      margin-bottom: 30px;
-    }
-
-    .risk-bar-wrap {
-      margin-bottom: 20px;
-    }
-
-    .risk-bar-label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .risk-bar-label span:first-child {
-      font-size: 0.85rem;
-      color: var(--cream);
-      font-weight: 500;
-    }
-
-    .risk-bar-label span:last-child {
-      font-size: 0.8rem;
-      color: var(--copper-glow);
-      font-weight: 500;
-    }
-
-    .risk-bar-track {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .risk-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--copper), var(--danger-bright));
-      animation: fillBar 1.5s 0.5s ease both;
-      transform-origin: left;
-    }
-
-    @keyframes fillBar {
-      from {
-        transform: scaleX(0);
-      }
-
-      to {
-        transform: scaleX(1);
-      }
-    }
-
-    /* ── PROCESS SECTION ── */
-    .process-section {
-      position: relative;
-      z-index: 2;
-      padding: 100px 80px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-      background: rgba(181, 101, 29, 0.1);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .process-step {
-      background: var(--indigo-deep);
-      padding: 40px 32px;
-      position: relative;
-      transition: background 0.3s;
-    }
-
-    .process-step:hover {
-      background: rgba(45, 42, 110, 0.5);
-    }
-
-    .step-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem;
-      color: rgba(181, 101, 29, 0.2);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .step-icon {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .step-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .step-body {
-      font-size: 0.83rem;
-      line-height: 1.6;
-      color: rgba(250, 246, 239, 0.55);
-      font-weight: 300;
-    }
-
-    /* ── CTA SECTION ── */
-    .cta-section {
-      position: relative;
-      z-index: 2;
-      padding: 80px;
-      overflow: hidden;
-    }
-
-    .cta-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(181, 101, 29, 0.2) 0%, rgba(45, 42, 110, 0.4) 100%);
-      border: 1px solid rgba(181, 101, 29, 0.3);
-      border-radius: 16px;
-      padding: 80px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-inner::before {
-      content: '⚡';
-      position: absolute;
-      right: 200px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14rem;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-
-    .cta-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      color: var(--cream);
-      margin-bottom: 16px;
-    }
-
-    .cta-heading em {
-      font-style: normal;
-      color: var(--copper-glow);
-    }
-
-    .cta-sub {
-      font-size: 1rem;
-      color: rgba(250, 246, 239, 0.65);
-      font-weight: 300;
-      max-width: 520px;
-      line-height: 1.6;
-    }
-
-    .cta-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-width: 260px;
-      align-items: center;
-    }
-
-    .phone-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .phone-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 0.08em;
-      color: var(--copper-glow);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .phone-num:hover {
-      color: var(--cream);
-    }
-
-    .phone-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .divider-or {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .divider-or::before,
-    .divider-or::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .divider-or span {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 2;
-      background: rgba(15, 13, 46, 0.9);
-      border-top: 1px solid rgba(181, 101, 29, 0.15);
-      padding: 40px 80px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.12em;
-      color: var(--copper-bright);
-    }
-
-    .footer-tagline {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    .footer-contact {
-      text-align: right;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .footer-contact a {
-      color: var(--copper-pale);
-      text-decoration: none;
-    }
-
-    .footer-contact a:hover {
-      color: var(--copper-glow);
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-      nav {
-        padding: 16px 24px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 100px 0 40px;
-      }
-
-      .hero-content {
-        padding: 40px 24px;
-      }
-
-      .hero-panel {
-        padding: 0 24px 40px;
-      }
-
-      .stats-band {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 40px 24px;
-      }
-
-      .stat-item:nth-child(2) {
-        border-right: none;
-      }
-
-      .signs-section,
-      .process-section,
-      .brands-section {
-        padding: 60px 24px;
-      }
-
-      .section-header {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .signs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .brands-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .cta-section {
-        padding: 40px 24px;
-      }
-
-      .cta-inner {
-        grid-template-columns: 1fr;
-        padding: 40px 28px;
-        gap: 40px;
-      }
-
-      .cta-actions {
-        min-width: unset;
-        width: 100%;
-      }
-
-      footer {
-        padding: 32px 24px;
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-
-      .footer-contact {
-        text-align: center;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Your Electrical Panel a Hidden Hazard? | Copper Crest Electric</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo: #1e1b4b;
+    --indigo-deep: #0f0d2e;
+    --indigo-mid: #2d2a6e;
+    --copper: #b5651d;
+    --copper-bright: #d4813a;
+    --copper-glow: #f0a050;
+    --copper-pale: #f5c990;
+    --cream: #faf6ef;
+    --white: #ffffff;
+    --danger: #c0392b;
+    --danger-bright: #e74c3c;
+    --text-muted: #9490c0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--indigo-deep);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  /* Stagger delays */
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+  .delay-5 { transition-delay: 0.5s; }
+  .delay-6 { transition-delay: 0.6s; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 48px;
+    background: rgba(15,13,46,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(181,101,29,0.2);
+    transition: padding 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    padding: 10px 48px;
+    background: rgba(15,13,46,0.95);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 44px;
+    width: auto;
+  }
+  .nav-logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--copper-bright);
+  }
+  .nav-logo-text span { color: var(--cream); }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--copper);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--copper-bright); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    overflow: hidden;
+    padding: 100px 0 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(181,101,29,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 30%, rgba(45,42,110,0.8) 0%, transparent 70%),
+      linear-gradient(160deg, var(--indigo-deep) 0%, #1a1640 100%);
+  }
+
+  .circuit-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .circuit-lines svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0.07;
+  }
+
+  .warning-stripe {
+    position: absolute;
+    top: 60px; left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--danger-bright) 0px, var(--danger-bright) 20px, transparent 20px, transparent 30px);
+    animation: stripeScroll 3s linear infinite;
+  }
+  @keyframes stripeScroll {
+    from { background-position: 0 0; }
+    to { background-position: 60px 0; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 48px 60px 80px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(231,76,60,0.4);
+    border-radius: 2px;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero-eyebrow .dot {
+    width: 8px; height: 8px;
+    background: var(--danger-bright);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero-eyebrow span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--danger-bright);
+  }
+
+  /* Word-by-word headline */
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.2rem, 6vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+    color: var(--cream);
+  }
+  h1 .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: wordReveal 0.5s ease forwards;
+  }
+  @keyframes wordReveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--copper-glow);
+    display: block;
+  }
+  h1 .danger-word {
+    color: var(--danger-bright);
+    position: relative;
+  }
+
+  .hero-body {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(250,246,239,0.75);
+    max-width: 480px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    animation: fadeUp 0.7s 0.8s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--copper), var(--copper-bright));
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 8px 32px rgba(181,101,29,0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(181,101,29,0.5);
+    background: linear-gradient(135deg, var(--copper-bright), var(--copper-glow));
+  }
+
+  .btn-secondary {
+    color: var(--copper-pale);
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid rgba(181,101,29,0.3);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--copper-glow); border-color: var(--copper-glow); }
+
+  /* Hero right — GHL Form */
+  .hero-form-wrap {
+    position: relative;
+    z-index: 2;
+    padding: 60px 80px 60px 20px;
+    animation: fadeUp 0.9s 0.3s ease both;
+  }
+
+  .form-card {
+    background: linear-gradient(145deg, rgba(45,42,110,0.6), rgba(15,13,46,0.8));
+    border: 1px solid rgba(181,101,29,0.25);
+    border-radius: 8px;
+    padding: 36px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(181,101,29,0.15);
+  }
+
+  .form-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    color: var(--copper-glow);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .form-card-title .icon {
+    width: 28px; height: 28px;
+    background: rgba(192,57,43,0.2);
+    border: 1px solid rgba(231,76,60,0.4);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .form-card-sub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .form-card input,
+  .form-card select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background: rgba(15,13,46,0.6);
+    border: 1px solid rgba(181,101,29,0.2);
+    border-radius: 4px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-card input::placeholder { color: var(--text-muted); }
+  .form-card input:focus,
+  .form-card select:focus {
+    border-color: var(--copper-bright);
+  }
+  .form-card select {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .form-card select option {
+    background: var(--indigo-deep);
+    color: var(--cream);
+  }
+
+  .form-card .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+    margin-top: 4px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .form-trust {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .form-trust .shield { font-size: 1rem; }
+
+  /* ── STATS BAND ── */
+  .stats-band {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, var(--copper) 0%, var(--copper-bright) 100%);
+    padding: 40px 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 20px 30px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem;
+    letter-spacing: 0.03em;
+    color: white;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── COST TABLE ── */
+  .cost-section {
+    position: relative;
+    z-index: 2;
+    padding: 100px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .cost-table-wrap {
+    overflow-x: auto;
+    margin-top: 48px;
+    border-radius: 12px;
+    border: 1px solid rgba(181,101,29,0.2);
+    background: rgba(15,13,46,0.5);
+  }
+
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  .cost-table thead th {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--copper-glow);
+    padding: 20px 24px;
+    text-align: left;
+    border-bottom: 2px solid rgba(181,101,29,0.3);
+    background: rgba(45,42,110,0.3);
+    white-space: nowrap;
+  }
+
+  .cost-table tbody tr {
+    transition: background 0.2s;
+  }
+  .cost-table tbody tr:hover {
+    background: rgba(45,42,110,0.2);
+  }
+
+  .cost-table tbody td {
+    padding: 18px 24px;
+    font-size: 0.88rem;
+    color: rgba(250,246,239,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .cost-table tbody tr:first-child {
+    background: rgba(181,101,29,0.08);
+  }
+  .cost-table tbody tr:first-child td {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .cost-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .cost-table .situation-cell {
+    font-weight: 500;
+    color: var(--cream);
+    min-width: 200px;
+  }
+
+  .cost-table .risk-cell {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .cost-table .risk-cell.danger {
+    color: var(--danger-bright);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .cost-table-note {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(231,76,60,0.2);
+    border-radius: 8px;
+    font-size: 1.05rem;
+    color: var(--cream);
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: center;
+  }
+  .cost-table-note strong {
+    color: var(--danger-bright);
+  }
+
+  /* ── SIGNS SECTION ── */
+  .signs-section {
+    position: relative;
+    z-index: 2;
+    padding: 100px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--copper-bright);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--copper-bright);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    color: var(--cream);
+    font-weight: 700;
+  }
+  h2 em {
+    font-style: italic;
+    color: var(--copper-glow);
+  }
+
+  .section-desc {
+    color: rgba(250,246,239,0.65);
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+    align-self: end;
+  }
+
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .sign-card {
+    background: linear-gradient(160deg, rgba(45,42,110,0.35), rgba(15,13,46,0.5));
+    border: 1px solid rgba(181,101,29,0.15);
+    border-radius: 8px;
+    padding: 32px;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .sign-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--copper), var(--copper-glow));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .sign-card:hover {
+    border-color: rgba(181,101,29,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .sign-card:hover::before { transform: scaleX(1); }
+
+  .sign-card-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: rgba(181,101,29,0.15);
+    line-height: 1;
+    margin-bottom: -10px;
+  }
+
+  .sign-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--cream);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .sign-card-body {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(250,246,239,0.6);
+    font-weight: 300;
+  }
+
+  .sign-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--danger-bright);
+    background: rgba(192,57,43,0.15);
+    border-radius: 2px;
+    padding: 4px 10px;
+  }
+
+  /* ── BRANDS SECTION ── */
+  .brands-section {
+    position: relative;
+    z-index: 2;
+    background: rgba(45,42,110,0.2);
+    border-top: 1px solid rgba(181,101,29,0.1);
+    border-bottom: 1px solid rgba(181,101,29,0.1);
+    padding: 80px;
+  }
+
+  .brands-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .brands-content .section-label { margin-bottom: 20px; }
+
+  .brands-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(15,13,46,0.5);
+    border: 1px solid rgba(181,101,29,0.12);
+    border-radius: 6px;
+    transition: border-color 0.25s;
+  }
+  .brand-row:hover { border-color: rgba(181,101,29,0.35); }
+
+  .brand-icon {
+    width: 44px; height: 44px;
+    min-width: 44px;
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(231,76,60,0.3);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .brand-name {
+    font-weight: 500;
+    color: var(--cream);
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .brand-reason {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .brand-badge {
+    margin-left: auto;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    background: rgba(192,57,43,0.2);
+    color: var(--danger-bright);
+    border: 1px solid rgba(231,76,60,0.3);
+    white-space: nowrap;
+  }
+
+  .risk-visual {
+    background: linear-gradient(160deg, rgba(45,42,110,0.4), rgba(15,13,46,0.6));
+    border: 1px solid rgba(181,101,29,0.2);
+    border-radius: 12px;
+    padding: 40px;
+  }
+
+  .risk-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    color: var(--copper-glow);
+    margin-bottom: 30px;
+  }
+
+  .risk-bar-wrap { margin-bottom: 20px; }
+  .risk-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .risk-bar-label span:first-child {
+    font-size: 0.85rem;
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .risk-bar-label span:last-child {
+    font-size: 0.8rem;
+    color: var(--copper-glow);
+    font-weight: 500;
+  }
+
+  .risk-bar-track {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .risk-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--copper), var(--danger-bright));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .risk-bar-fill.animate {
+    transform: scaleX(1);
+  }
+
+  /* ── PROCESS SECTION ── */
+  .process-section {
+    position: relative;
+    z-index: 2;
+    padding: 100px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: rgba(181,101,29,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .process-step {
+    background: var(--indigo-deep);
+    padding: 40px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .process-step:hover { background: rgba(45,42,110,0.5); }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: rgba(181,101,29,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step-icon {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step-body {
+    font-size: 0.83rem;
+    line-height: 1.6;
+    color: rgba(250,246,239,0.55);
+    font-weight: 300;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    position: relative;
+    z-index: 2;
+    padding: 80px;
+    overflow: hidden;
+  }
+
+  .cta-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(181,101,29,0.2) 0%, rgba(45,42,110,0.4) 100%);
+    border: 1px solid rgba(181,101,29,0.3);
+    border-radius: 16px;
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-inner::before {
+    content: '⚡';
+    position: absolute;
+    right: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14rem;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .cta-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+  .cta-heading em {
+    font-style: normal;
+    color: var(--copper-glow);
+  }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: rgba(250,246,239,0.65);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 260px;
+    align-items: center;
+  }
+
+  .phone-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .phone-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--copper-glow);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .phone-num:hover { color: var(--cream); }
+
+  .phone-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .divider-or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .divider-or::before, .divider-or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+  .divider-or span { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 2;
+    background: rgba(15,13,46,0.9);
+    border-top: 1px solid rgba(181,101,29,0.15);
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    color: var(--copper-bright);
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .footer-contact {
+    text-align: right;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .footer-contact a { color: var(--copper-pale); text-decoration: none; }
+  .footer-contact a:hover { color: var(--copper-glow); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 0 40px; }
+    .hero-content { padding: 40px 24px; }
+    .hero-form-wrap { padding: 0 24px 40px; }
+    .stats-band { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .cost-section { padding: 60px 24px; }
+    .signs-section, .process-section, .brands-section { padding: 60px 24px; }
+    .section-header { grid-template-columns: 1fr; gap: 20px; }
+    .signs-grid { grid-template-columns: 1fr; }
+    .brands-inner { grid-template-columns: 1fr; gap: 40px; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .cta-section { padding: 40px 24px; }
+    .cta-inner { grid-template-columns: 1fr; padding: 40px 28px; gap: 40px; }
+    .cta-actions { min-width: unset; width: 100%; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
+    .footer-contact { text-align: center; }
+    .cost-table-wrap { margin-top: 32px; }
+  }
+</style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="https://coppercrestelectric.com" class="nav-logo">COPPER CREST <span>ELECTRIC</span></a>
-    <a href="tel:17608000021" class="nav-cta">⚡ Call Now: 760-800-0021</a>
-  </nav>
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="https://coppercrestelectric.com" class="nav-logo">
+    <!-- Replace src with actual Copper Crest logo URL -->
+    <img src="https://coppercrestelectric.com/wp-content/uploads/2024/01/copper-crest-logo.png" alt="Copper Crest Electric" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <span class="nav-logo-text" style="display:none;">COPPER CREST <span>ELECTRIC</span></span>
+  </a>
+  <a href="tel:17608000021" class="nav-cta">⚡ Call Now: 760-800-0021</a>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="warning-stripe"></div>
-    <div class="circuit-lines">
-      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-        <path d="M0 200 L200 200 L200 400 L600 400 L600 200 L1200 200" stroke="rgba(181,101,29,0.5)" stroke-width="1"
-          fill="none" stroke-dasharray="6 10" />
-        <path d="M0 600 L400 600 L400 300 L800 300 L800 600 L1200 600" stroke="rgba(181,101,29,0.3)" stroke-width="1"
-          fill="none" stroke-dasharray="4 8" />
-        <circle cx="200" cy="200" r="5" fill="rgba(181,101,29,0.4)" />
-        <circle cx="200" cy="400" r="5" fill="rgba(181,101,29,0.4)" />
-        <circle cx="600" cy="400" r="5" fill="rgba(181,101,29,0.4)" />
-        <circle cx="600" cy="200" r="5" fill="rgba(181,101,29,0.4)" />
-        <circle cx="400" cy="600" r="5" fill="rgba(181,101,29,0.3)" />
-        <circle cx="800" cy="600" r="5" fill="rgba(181,101,29,0.3)" />
-        <circle cx="800" cy="300" r="5" fill="rgba(181,101,29,0.3)" />
-        <circle cx="400" cy="300" r="5" fill="rgba(181,101,29,0.3)" />
-      </svg>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="warning-stripe"></div>
+  <div class="circuit-lines">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <path d="M0 200 L200 200 L200 400 L600 400 L600 200 L1200 200" stroke="rgba(181,101,29,0.5)" stroke-width="1" fill="none" stroke-dasharray="6 10"/>
+      <path d="M0 600 L400 600 L400 300 L800 300 L800 600 L1200 600" stroke="rgba(181,101,29,0.3)" stroke-width="1" fill="none" stroke-dasharray="4 8"/>
+      <circle cx="200" cy="200" r="5" fill="rgba(181,101,29,0.4)"/>
+      <circle cx="200" cy="400" r="5" fill="rgba(181,101,29,0.4)"/>
+      <circle cx="600" cy="400" r="5" fill="rgba(181,101,29,0.4)"/>
+      <circle cx="600" cy="200" r="5" fill="rgba(181,101,29,0.4)"/>
+      <circle cx="400" cy="600" r="5" fill="rgba(181,101,29,0.3)"/>
+      <circle cx="800" cy="600" r="5" fill="rgba(181,101,29,0.3)"/>
+      <circle cx="800" cy="300" r="5" fill="rgba(181,101,29,0.3)"/>
+      <circle cx="400" cy="300" r="5" fill="rgba(181,101,29,0.3)"/>
+    </svg>
+  </div>
 
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="dot"></span>
-        <span>Safety Alert — North County San Diego</span>
-      </div>
-      <h1>
-        Your Panel
-        <em>Could Be</em>
-        <span class="danger-word">Failing</span> You
-      </h1>
-      <p class="hero-body">
-        Outdated electrical panels are one of the leading causes of house fires in California. If your home was built
-        before 2000, your panel may be undersized, worn out, or dangerously obsolete — and you might not know it until
-        it's too late.
-      </p>
-      <div class="hero-ctas">
-        <a href="tel:17608000021" class="btn-primary">
-          ⚡ Get a Free Panel Inspection
-        </a>
-        <a href="#signs" class="btn-secondary">
-          See the warning signs →
-        </a>
-      </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span>Safety Alert — North County San Diego</span>
     </div>
-
-    <div class="hero-panel">
-      <div class="panel-card">
-        <div class="panel-title">
-          <div class="icon">⚠</div>
-          IS YOUR HOME AT RISK?
-        </div>
-        <ul class="warning-list">
-          <li>
-            <div class="warning-icon">🔌</div>
-            <div class="warning-text">
-              <strong>Breakers that trip frequently</strong>
-              <p>Overloaded circuits struggle to power today's energy demands — a sign your panel is maxed out.</p>
-            </div>
-          </li>
-          <li>
-            <div class="warning-icon">💡</div>
-            <div class="warning-text">
-              <strong>Flickering or dimming lights</strong>
-              <p>Inconsistent power delivery indicates failing connections or an aging distribution system.</p>
-            </div>
-          </li>
-          <li>
-            <div class="warning-icon">🔥</div>
-            <div class="warning-text">
-              <strong>Burning smell or warm outlets</strong>
-              <p>Electrical burning odors are a critical emergency sign — call us immediately.</p>
-            </div>
-          </li>
-          <li>
-            <div class="warning-icon">📅</div>
-            <div class="warning-text">
-              <strong>Panel older than 20–25 years</strong>
-              <p>Older panels weren't designed for modern appliance loads, EVs, or solar integration.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS BAND -->
-  <div class="stats-band">
-    <div class="stat-item">
-      <div class="stat-number">51K+</div>
-      <div class="stat-label">Home electrical fires per year in the U.S.</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">40%</div>
-      <div class="stat-label">Of fires caused by outdated wiring &amp; panels</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">4 Gen</div>
-      <div class="stat-label">Of Copper Crest craftsmanship behind every job</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Licensed &amp; certified CA electricians</div>
+    <h1 id="heroHeadline">
+      Your Panel
+      <em>Could Be</em>
+      <span class="danger-word">Failing</span> You
+    </h1>
+    <p class="hero-body">
+      Outdated electrical panels are one of the leading causes of house fires in California. If your home was built before 2000, your panel may be undersized, worn out, or dangerously obsolete — and you might not know it until it's too late.
+    </p>
+    <div class="hero-ctas">
+      <a href="#heroForm" class="btn-primary">
+        ⚡ Get a Free Panel Inspection
+      </a>
+      <a href="#signs" class="btn-secondary">
+        See the warning signs →
+      </a>
     </div>
   </div>
 
-  <!-- SIGNS SECTION -->
-  <section class="signs-section" id="signs">
-    <div class="section-header">
-      <div>
-        <div class="section-label">Know the warning signs</div>
-        <h2>6 Signs Your Panel<br><em>Needs Replacing</em></h2>
+  <!-- GHL FORM - ABOVE THE FOLD -->
+  <div class="hero-form-wrap" id="heroForm">
+    <div class="form-card">
+      <div class="form-card-title">
+        <div class="icon">⚠</div>
+        FREE PANEL INSPECTION
       </div>
-      <p class="section-desc">Modern homes demand far more power than panels built 20–30 years ago were designed to
-        handle. Ignoring the signs can mean fire, shock hazards, or failed home inspections.</p>
-    </div>
+      <p class="form-card-sub">Find out if your panel is at risk — no cost, no obligation.</p>
 
-    <div class="signs-grid">
-      <div class="sign-card">
-        <div class="sign-card-number">01</div>
-        <h3 class="sign-card-title">Breakers That Won't Stay Reset</h3>
-        <p class="sign-card-body">A breaker that trips repeatedly isn't just annoying — it means your panel is unable to
-          safely handle your home's electrical load and is working overtime to prevent a fire.</p>
-        <span class="sign-tag">⚠ High Risk</span>
-      </div>
-      <div class="sign-card">
-        <div class="sign-card-number">02</div>
-        <h3 class="sign-card-title">The Panel Is Warm to the Touch</h3>
-        <p class="sign-card-body">Heat radiating from your electrical panel is never normal. This indicates loose
-          connections, overloaded circuits, or internal arcing — all potential fire starters.</p>
-        <span class="sign-tag">⚠ Critical</span>
-      </div>
-      <div class="sign-card">
-        <div class="sign-card-number">03</div>
-        <h3 class="sign-card-title">You Have a Recalled Brand</h3>
-        <p class="sign-card-body">Certain brands — including Federal Pacific, Zinsco, and Pushmatic — have known safety
-          defects and were recalled. If you have one, it needs immediate replacement regardless of age.</p>
-        <span class="sign-tag">⚠ Urgent</span>
-      </div>
-      <div class="sign-card">
-        <div class="sign-card-number">04</div>
-        <h3 class="sign-card-title">Only 100-Amp Service</h3>
-        <p class="sign-card-body">Today's homes need 200 amps minimum, especially with EVs, solar systems, and
-          whole-home AC units. An undersized panel limits your home's potential and can become overloaded.</p>
-        <span class="sign-tag">⚠ Capacity Issue</span>
-      </div>
-      <div class="sign-card">
-        <div class="sign-card-number">05</div>
-        <h3 class="sign-card-title">Fuse Box (Not a Breaker Panel)</h3>
-        <p class="sign-card-body">If your home still uses screw-in fuses instead of breakers, you have one of the oldest
-          electrical systems possible. Fuse boxes are considered a major safety and insurance liability.</p>
-        <span class="sign-tag">⚠ Replace Immediately</span>
-      </div>
-      <div class="sign-card">
-        <div class="sign-card-number">06</div>
-        <h3 class="sign-card-title">Lights Dim When Appliances Run</h3>
-        <p class="sign-card-body">Voltage sags when your dishwasher or dryer kicks on? Your panel is struggling to
-          distribute power properly. This worsens over time and stresses every connected device.</p>
-        <span class="sign-tag">⚠ Performance Issue</span>
+      <!-- 
+        ═══════════════════════════════════════
+        GHL FORM EMBED — REPLACE THIS SECTION
+        ═══════════════════════════════════════
+        Option A: Paste your GHL iframe embed code here, replacing the placeholder form below.
+        Option B: Keep this HTML form and connect it to GHL via webhook/Zapier.
+        
+        To get the GHL embed code:
+        1. Go to GHL → Sites → Forms → Create/Edit your form
+        2. Copy the embed code (iframe or JS snippet)
+        3. Replace everything between the GHL FORM START and GHL FORM END comments
+        ═══════════════════════════════════════
+      -->
+      <!-- GHL FORM START -->
+      <form id="panelForm" action="https://coppercrestelectric.com/contact-us/" method="GET">
+        <input type="text" name="name" placeholder="Your Full Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="address" placeholder="Property Address" required>
+        <select name="insurance_letter" required>
+          <option value="" disabled selected>Have you received an insurance letter?</option>
+          <option value="yes">Yes — my insurer sent a notice</option>
+          <option value="no">No — but I'm concerned about my panel</option>
+          <option value="selling">Selling/buying — panel flagged in inspection</option>
+        </select>
+        <button type="submit" class="btn-primary">⚡ Get My Free Inspection</button>
+      </form>
+      <!-- GHL FORM END -->
+
+      <div class="form-trust">
+        <span class="shield">🛡</span>
+        100% free · No obligation · Licensed CA electricians · Same-week availability
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- BRANDS SECTION -->
-  <section class="brands-section">
-    <div class="brands-inner">
-      <div class="brands-content">
-        <div class="section-label">Known Hazardous Brands</div>
-        <h2>Does Your Panel<br><em>Have One of These</em><br>Names on It?</h2>
-        <p
-          style="color: rgba(250,246,239,0.6); font-size: 0.95rem; line-height: 1.7; font-weight: 300; margin-top: 16px;">
-          These manufacturers have documented histories of panel failures, malfunction, and increased fire risk. If you
-          recognize any of these brands, schedule an inspection today.</p>
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-item reveal delay-1">
+    <div class="stat-number" data-count="51000" data-suffix="K+">0</div>
+    <div class="stat-label">Home electrical fires per year in the U.S.</div>
+  </div>
+  <div class="stat-item reveal delay-2">
+    <div class="stat-number" data-count="40" data-suffix="%">0</div>
+    <div class="stat-label">Of fires caused by outdated wiring &amp; panels</div>
+  </div>
+  <div class="stat-item reveal delay-3">
+    <div class="stat-number" data-count="4" data-suffix=" Gen">0</div>
+    <div class="stat-label">Of Copper Crest craftsmanship behind every job</div>
+  </div>
+  <div class="stat-item reveal delay-4">
+    <div class="stat-number" data-count="100" data-suffix="%">0</div>
+    <div class="stat-label">Licensed &amp; certified CA electricians</div>
+  </div>
+</div>
 
-        <div class="brands-list">
-          <div class="brand-row">
-            <div class="brand-icon">⚡</div>
-            <div>
-              <div class="brand-name">Federal Pacific Electric (FPE / Stab-Lok)</div>
-              <div class="brand-reason">Breakers may fail to trip during overloads — still found in millions of homes
-              </div>
-            </div>
-            <span class="brand-badge">Recall Hazard</span>
-          </div>
-          <div class="brand-row">
-            <div class="brand-icon">⚡</div>
-            <div>
-              <div class="brand-name">Zinsco / GTE-Sylvania</div>
-              <div class="brand-reason">Bus bars melt and fuse to breakers, preventing safe tripping</div>
-            </div>
-            <span class="brand-badge">Fire Risk</span>
-          </div>
-          <div class="brand-row">
-            <div class="brand-icon">⚡</div>
-            <div>
-              <div class="brand-name">Pushmatic (Bulldog)</div>
-              <div class="brand-reason">Outdated design, no longer supported; breakers stick and arc</div>
-            </div>
-            <span class="brand-badge">Obsolete</span>
-          </div>
-          <div class="brand-row">
-            <div class="brand-icon">⚡</div>
-            <div>
-              <div class="brand-name">Challenger / Bryant</div>
-              <div class="brand-reason">Some models linked to arcing failures and premature breaker wear</div>
-            </div>
-            <span class="brand-badge">Aging Risk</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="risk-visual">
-        <div class="risk-title">PANEL AGE RISK ASSESSMENT</div>
-        <div class="risk-bar-wrap">
-          <div class="risk-bar-label"><span>Built Before 1980</span><span>Critical Risk</span></div>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill" style="width: 95%;"></div>
-          </div>
-        </div>
-        <div class="risk-bar-wrap">
-          <div class="risk-bar-label"><span>1980–1999</span><span>High Risk</span></div>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill" style="width: 75%;"></div>
-          </div>
-        </div>
-        <div class="risk-bar-wrap">
-          <div class="risk-bar-label"><span>2000–2010</span><span>Moderate Risk</span></div>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill" style="width: 45%;"></div>
-          </div>
-        </div>
-        <div class="risk-bar-wrap">
-          <div class="risk-bar-label"><span>2010–Present</span><span>Lower Risk</span></div>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill"
-              style="width: 20%; background: linear-gradient(90deg, var(--copper-bright), var(--copper-glow));"></div>
-          </div>
-        </div>
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
-          <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">Risk level also increases
-            significantly with heavy appliance use, EV charging, solar system additions, or previous DIY electrical
-            work.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS SECTION -->
-  <section class="process-section">
-    <div class="section-header">
-      <div>
-        <div class="section-label">Our Panel Upgrade Process</div>
-        <h2>Simple, Fast,<br><em>Done Right.</em></h2>
-      </div>
-      <p class="section-desc">From first call to final inspection, Copper Crest makes panel upgrades painless. Most jobs
-        are completed in a single day with minimal disruption to your home or business.</p>
-    </div>
-
-    <div class="process-grid">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <span class="step-icon">📞</span>
-        <div class="step-title">Free Consultation</div>
-        <p class="step-body">Call or schedule online. We'll discuss your home's needs, current panel specs, and any
-          concerns — no cost, no pressure.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <span class="step-icon">🔍</span>
-        <div class="step-title">On-Site Inspection</div>
-        <p class="step-body">A licensed Copper Crest electrician visits your home, assesses your current panel, and
-          provides a clear written estimate.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <span class="step-icon">🛠</span>
-        <div class="step-title">Same-Day Installation</div>
-        <p class="step-body">We handle permits, install your new panel, and restore full power — usually in a single
-          visit with minimal downtime.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <span class="step-icon">✅</span>
-        <div class="step-title">Final Inspection & Warranty</div>
-        <p class="step-body">Every installation is inspected and code-certified. Your new panel comes with a workmanship
-          warranty and our ongoing support.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-inner">
-      <div>
-        <h2 class="cta-heading">Don't Wait for<br><em>a Warning Sign</em><br>to Become a Fire</h2>
-        <p class="cta-sub">Schedule your free panel inspection today. Copper Crest serves Oceanside, Escondido, and all
-          of North County San Diego with same-week availability.</p>
-      </div>
-      <div class="cta-actions">
-        <div class="phone-cta">
-          <span class="phone-label">Call us directly</span>
-          <a href="tel:17608000021" class="phone-num">760-800-0021</a>
-        </div>
-        <div class="divider-or"><span>or</span></div>
-        <a href="https://coppercrestelectric.com/contact-us/" class="btn-primary"
-          style="width: 100%; justify-content: center;">
-          📋 Book a Free Inspection
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
+<!-- COST COMPARISON TABLE -->
+<section class="cost-section">
+  <div class="section-header reveal">
     <div>
-      <div class="footer-logo">COPPER CREST ELECTRIC</div>
-      <div class="footer-tagline">Crafting Excellence. Illuminating Your Vision.</div>
+      <div class="section-label">The real cost of waiting</div>
+      <h2>What Your Panel Decision<br><em>Actually Costs You</em></h2>
     </div>
-    <div class="footer-contact">
-      <a href="tel:17608000021">+1 760-800-0021</a><br>
-      Oceanside &amp; Escondido, CA<br>
-      Mon–Sat 7:00am – 5:00pm
+    <p class="section-desc">The upgrade is $3,500–$5,500. The alternative is paying more — sometimes catastrophically more. Here's the math.</p>
+  </div>
+
+  <div class="cost-table-wrap reveal delay-2">
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Your Situation</th>
+          <th>What You Pay</th>
+          <th>Insurance Cost</th>
+          <th>Total Cost</th>
+          <th>What You're Risking</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="situation-cell">✅ Act now — planned upgrade</td>
+          <td>$3,500–$5,500 one time</td>
+          <td>~$1,400/yr standard</td>
+          <td>~$6,300–$8,300 over 2 yrs</td>
+          <td class="risk-cell" style="color: #4ade80;">Nothing. Done. Insured. Protected.</td>
+        </tr>
+        <tr>
+          <td class="situation-cell">⏰ Wait until forced — emergency upgrade</td>
+          <td>$6,000–$9,000+</td>
+          <td>~$1,400/yr standard</td>
+          <td>~$8,300–$11,800</td>
+          <td class="risk-cell">Same result, 40–60% more expensive under deadline pressure</td>
+        </tr>
+        <tr>
+          <td class="situation-cell">😬 Do nothing — pushed to FAIR Plan</td>
+          <td>$0 now</td>
+          <td>~$3,200/yr FAIR Plan + DIC wrap</td>
+          <td>~$6,400+/yr, less coverage</td>
+          <td class="risk-cell">Paying more for less, every month, forever — until you upgrade anyway</td>
+        </tr>
+        <tr>
+          <td class="situation-cell">🔥 Do nothing — fire happens uninsured</td>
+          <td>$0 now</td>
+          <td class="risk-cell danger">$0 paid out — claim denied</td>
+          <td>$8,000–$75,000 out of pocket</td>
+          <td class="risk-cell danger">You paid premiums for years. They don't pay because you were warned.</td>
+        </tr>
+        <tr>
+          <td class="situation-cell">💀 Do nothing — total loss, uninsured</td>
+          <td>$0 now</td>
+          <td class="risk-cell danger">$0 paid out — claim denied</td>
+          <td class="risk-cell danger">$200,000–$600,000+</td>
+          <td class="risk-cell danger">Mortgage still exists. House doesn't. You still owe the bank.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cost-table-note reveal delay-3">
+    The upgrade costs <strong>$3,500–$5,500</strong>. One small electrical fire costs more than that — uninsured. <strong>The math isn't complicated.</strong>
+  </div>
+</section>
+
+<!-- SIGNS SECTION -->
+<section class="signs-section" id="signs">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Know the warning signs</div>
+      <h2>6 Signs Your Panel<br><em>Needs Replacing</em></h2>
     </div>
-  </footer>
+    <p class="section-desc">Modern homes demand far more power than panels built 20–30 years ago were designed to handle. Ignoring the signs can mean fire, shock hazards, or failed home inspections.</p>
+  </div>
+
+  <div class="signs-grid">
+    <div class="sign-card reveal delay-1">
+      <div class="sign-card-number">01</div>
+      <h3 class="sign-card-title">Breakers That Won't Stay Reset</h3>
+      <p class="sign-card-body">A breaker that trips repeatedly isn't just annoying — it means your panel is unable to safely handle your home's electrical load and is working overtime to prevent a fire.</p>
+      <span class="sign-tag">⚠ High Risk</span>
+    </div>
+    <div class="sign-card reveal delay-2">
+      <div class="sign-card-number">02</div>
+      <h3 class="sign-card-title">The Panel Is Warm to the Touch</h3>
+      <p class="sign-card-body">Heat radiating from your electrical panel is never normal. This indicates loose connections, overloaded circuits, or internal arcing — all potential fire starters.</p>
+      <span class="sign-tag">⚠ Critical</span>
+    </div>
+    <div class="sign-card reveal delay-3">
+      <div class="sign-card-number">03</div>
+      <h3 class="sign-card-title">You Have a Recalled Brand</h3>
+      <p class="sign-card-body">Certain brands — including Federal Pacific, Zinsco, and Pushmatic — have known safety defects and were recalled. If you have one, it needs immediate replacement regardless of age.</p>
+      <span class="sign-tag">⚠ Urgent</span>
+    </div>
+    <div class="sign-card reveal delay-1">
+      <div class="sign-card-number">04</div>
+      <h3 class="sign-card-title">Only 100-Amp Service</h3>
+      <p class="sign-card-body">Today's homes need 200 amps minimum, especially with EVs, solar systems, and whole-home AC units. An undersized panel limits your home's potential and can become overloaded.</p>
+      <span class="sign-tag">⚠ Capacity Issue</span>
+    </div>
+    <div class="sign-card reveal delay-2">
+      <div class="sign-card-number">05</div>
+      <h3 class="sign-card-title">Fuse Box (Not a Breaker Panel)</h3>
+      <p class="sign-card-body">If your home still uses screw-in fuses instead of breakers, you have one of the oldest electrical systems possible. Fuse boxes are considered a major safety and insurance liability.</p>
+      <span class="sign-tag">⚠ Replace Immediately</span>
+    </div>
+    <div class="sign-card reveal delay-3">
+      <div class="sign-card-number">06</div>
+      <h3 class="sign-card-title">Lights Dim When Appliances Run</h3>
+      <p class="sign-card-body">Voltage sags when your dishwasher or dryer kicks on? Your panel is struggling to distribute power properly. This worsens over time and stresses every connected device.</p>
+      <span class="sign-tag">⚠ Performance Issue</span>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS SECTION -->
+<section class="brands-section">
+  <div class="brands-inner">
+    <div class="brands-content reveal-left">
+      <div class="section-label">Known Hazardous Brands</div>
+      <h2>Does Your Panel<br><em>Have One of These</em><br>Names on It?</h2>
+      <p style="color: rgba(250,246,239,0.6); font-size: 0.95rem; line-height: 1.7; font-weight: 300; margin-top: 16px;">These manufacturers have documented histories of panel failures, malfunction, and increased fire risk. If you recognize any of these brands, schedule an inspection today.</p>
+
+      <div class="brands-list">
+        <div class="brand-row reveal delay-1">
+          <div class="brand-icon">⚡</div>
+          <div>
+            <div class="brand-name">Federal Pacific Electric (FPE / Stab-Lok)</div>
+            <div class="brand-reason">Breakers may fail to trip during overloads — still found in millions of homes</div>
+          </div>
+          <span class="brand-badge">Recall Hazard</span>
+        </div>
+        <div class="brand-row reveal delay-2">
+          <div class="brand-icon">⚡</div>
+          <div>
+            <div class="brand-name">Zinsco / GTE-Sylvania</div>
+            <div class="brand-reason">Bus bars melt and fuse to breakers, preventing safe tripping</div>
+          </div>
+          <span class="brand-badge">Fire Risk</span>
+        </div>
+        <div class="brand-row reveal delay-3">
+          <div class="brand-icon">⚡</div>
+          <div>
+            <div class="brand-name">Pushmatic (Bulldog)</div>
+            <div class="brand-reason">Outdated design, no longer supported; breakers stick and arc</div>
+          </div>
+          <span class="brand-badge">Obsolete</span>
+        </div>
+        <div class="brand-row reveal delay-4">
+          <div class="brand-icon">⚡</div>
+          <div>
+            <div class="brand-name">Challenger / Bryant</div>
+            <div class="brand-reason">Some models linked to arcing failures and premature breaker wear</div>
+          </div>
+          <span class="brand-badge">Aging Risk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="risk-visual reveal-right">
+      <div class="risk-title">PANEL AGE RISK ASSESSMENT</div>
+      <div class="risk-bar-wrap">
+        <div class="risk-bar-label"><span>Built Before 1980</span><span>Critical Risk</span></div>
+        <div class="risk-bar-track">
+          <div class="risk-bar-fill" data-width="95%"></div>
+        </div>
+      </div>
+      <div class="risk-bar-wrap">
+        <div class="risk-bar-label"><span>1980–1999</span><span>High Risk</span></div>
+        <div class="risk-bar-track">
+          <div class="risk-bar-fill" data-width="75%"></div>
+        </div>
+      </div>
+      <div class="risk-bar-wrap">
+        <div class="risk-bar-label"><span>2000–2010</span><span>Moderate Risk</span></div>
+        <div class="risk-bar-track">
+          <div class="risk-bar-fill" data-width="45%"></div>
+        </div>
+      </div>
+      <div class="risk-bar-wrap">
+        <div class="risk-bar-label"><span>2010–Present</span><span>Lower Risk</span></div>
+        <div class="risk-bar-track">
+          <div class="risk-bar-fill" data-width="20%" style="background: linear-gradient(90deg, var(--copper-bright), var(--copper-glow));"></div>
+        </div>
+      </div>
+      <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">Risk level also increases significantly with heavy appliance use, EV charging, solar system additions, or previous DIY electrical work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS SECTION -->
+<section class="process-section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Our Panel Upgrade Process</div>
+      <h2>Simple, Fast,<br><em>Done Right.</em></h2>
+    </div>
+    <p class="section-desc">From first call to final inspection, Copper Crest makes panel upgrades painless. Most jobs are completed in a single day with minimal disruption to your home or business.</p>
+  </div>
+
+  <div class="process-grid">
+    <div class="process-step reveal delay-1">
+      <div class="step-num">01</div>
+      <span class="step-icon">📞</span>
+      <div class="step-title">Free Consultation</div>
+      <p class="step-body">Call or schedule online. We'll discuss your home's needs, current panel specs, and any concerns — no cost, no pressure.</p>
+    </div>
+    <div class="process-step reveal delay-2">
+      <div class="step-num">02</div>
+      <span class="step-icon">🔍</span>
+      <div class="step-title">On-Site Inspection</div>
+      <p class="step-body">A licensed Copper Crest electrician visits your home, assesses your current panel, and provides a clear written estimate.</p>
+    </div>
+    <div class="process-step reveal delay-3">
+      <div class="step-num">03</div>
+      <span class="step-icon">🛠</span>
+      <div class="step-title">Same-Day Installation</div>
+      <p class="step-body">We handle permits, install your new panel, and restore full power — usually in a single visit with minimal downtime.</p>
+    </div>
+    <div class="process-step reveal delay-4">
+      <div class="step-num">04</div>
+      <span class="step-icon">✅</span>
+      <div class="step-title">Final Inspection & Warranty</div>
+      <p class="step-body">Every installation is inspected and code-certified. Your new panel comes with a workmanship warranty and our ongoing support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal-scale">
+    <div>
+      <h2 class="cta-heading">Don't Wait for<br><em>a Warning Sign</em><br>to Become a Fire</h2>
+      <p class="cta-sub">Schedule your free panel inspection today. Copper Crest serves Oceanside, Escondido, and all of North County San Diego with same-week availability.</p>
+    </div>
+    <div class="cta-actions">
+      <div class="phone-cta">
+        <span class="phone-label">Call us directly</span>
+        <a href="tel:17608000021" class="phone-num">760-800-0021</a>
+      </div>
+      <div class="divider-or"><span>or</span></div>
+      <a href="#heroForm" class="btn-primary" style="width: 100%; justify-content: center;">
+        📋 Book a Free Inspection
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="reveal">
+  <div>
+    <div class="footer-logo">COPPER CREST ELECTRIC</div>
+    <div class="footer-tagline">Crafting Excellence. Illuminating Your Vision.</div>
+  </div>
+  <div class="footer-contact">
+    <a href="tel:17608000021">+1 760-800-0021</a><br>
+    Oceanside &amp; Escondido, CA<br>
+    Mon–Sat 7:00am – 5:00pm
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- JAVASCRIPT — Scroll Animations Engine  -->
+<!-- ═══════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── NAV SHRINK ON SCROLL ──
+  const nav = document.getElementById('mainNav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // ── WORD-BY-WORD HEADLINE REVEAL ──
+  const headline = document.getElementById('heroHeadline');
+  if (headline) {
+    const html = headline.innerHTML;
+    // Wrap individual words in spans while preserving HTML tags
+    let wordIndex = 0;
+    const wrapped = html.replace(/>([^<]+)</g, (match, text) => {
+      const words = text.split(/(\s+)/);
+      const result = words.map(w => {
+        if (w.trim() === '') return w;
+        wordIndex++;
+        return `<span class="word" style="animation-delay: ${0.15 + wordIndex * 0.08}s">${w}</span>`;
+      }).join('');
+      return '>' + result + '<';
+    });
+    headline.innerHTML = wrapped;
+  }
+
+  // ── INTERSECTION OBSERVER — BIDIRECTIONAL ──
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        // Reverse animation when scrolling away
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+
+  // ── COUNT-UP NUMBERS ──
+  const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+  let countedUp = new Set();
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      if (entry.isIntersecting && !countedUp.has(el)) {
+        countedUp.add(el);
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const start = performance.now();
+
+        // Format large numbers
+        const format = (n) => {
+          if (target >= 10000) return Math.floor(n / 1000) + suffix;
+          return Math.floor(n) + suffix;
+        };
+
+        const animate = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = eased * target;
+          el.textContent = format(current);
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+
+        requestAnimationFrame(animate);
+      } else if (!entry.isIntersecting) {
+        // Reset when scrolling away
+        countedUp.delete(el);
+        el.textContent = '0';
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(el => countObserver.observe(el));
+
+  // ── RISK BARS — FILL ON SCROLL, REVERSE ON SCROLL UP ──
+  const riskBars = document.querySelectorAll('.risk-bar-fill[data-width]');
+
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const bar = entry.target;
+      if (entry.isIntersecting) {
+        bar.style.width = bar.dataset.width;
+        bar.classList.add('animate');
+      } else {
+        bar.classList.remove('animate');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  riskBars.forEach(bar => barObserver.observe(bar));
+
+})();
+</script>
 
 </body>
-
 </html>
