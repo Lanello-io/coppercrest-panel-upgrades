@@ -47,13 +47,13 @@
   }
 
   /* SCROLL ANIMATIONS */
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
   .reveal-left.visible { opacity: 1; transform: translateX(0); }
-  .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
   .reveal-right.visible { opacity: 1; transform: translateX(0); }
-  .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-scale { opacity: 0; transform: scale(0.95); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
   .reveal-scale.visible { opacity: 1; transform: scale(1); }
   .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
   .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
@@ -223,7 +223,8 @@
   .reviews-score { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--cream); }
   .reviews-count { font-size: 0.85rem; color: var(--text-muted); }
   .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .review-card { background: rgba(15,13,46,0.5); border: 1px solid rgba(181,101,29,0.12); border-radius: 8px; padding: 28px; }
+  .review-card { background: rgba(15,13,46,0.5); border: 1px solid rgba(181,101,29,0.12); border-radius: 8px; padding: 28px; text-decoration: none; display: block; transition: all 0.3s; cursor: pointer; }
+  .review-card:hover { border-color: rgba(181,101,29,0.4); transform: translateY(-3px); }
   .review-stars { color: var(--copper-glow); font-size: 0.9rem; margin-bottom: 12px; }
   .review-text { font-size: 0.88rem; color: rgba(250,246,239,0.75); line-height: 1.65; font-weight: 300; margin-bottom: 16px; font-style: italic; }
   .review-author { font-size: 0.8rem; color: var(--copper-pale); font-weight: 500; }
@@ -363,7 +364,7 @@
       <span class="danger-word">Your Insurance.</span>
     </h1>
     <p class="hero-body">
-      California insurers are sending cancellation letters to homes with outdated panels — often with just 30 days notice. If your home was built before 2000, your coverage may already be at risk.
+      California insurers are canceling coverage for homes with outdated panels — often with just 30 days notice. If your home was built before 2000, your coverage may already be at risk.
     </p>
   </div>
 
@@ -474,17 +475,17 @@
       <div class="offer-item reveal delay-1">
         <div class="offer-item-icon">🔧</div>
         <div class="offer-item-title">Truly Turnkey</div>
-        <div class="offer-item-body">We handle permits, city & county coordination, utility work orders, trenching, grading, and siding repair. You don't lift a finger.</div>
+        <div class="offer-item-body">Permits, utility coordination, trenching, grading, siding repair — all handled. You don't lift a finger.</div>
       </div>
       <div class="offer-item reveal delay-2">
         <div class="offer-item-icon">🛡</div>
         <div class="offer-item-title">Warranty & Quality</div>
-        <div class="offer-item-body">1-year workmanship warranty plus manufacturer warranties on all materials. Inspected, code-certified, and built to last.</div>
+        <div class="offer-item-body">1-year workmanship warranty plus manufacturer warranties. Inspected and code-certified.</div>
       </div>
       <div class="offer-item reveal delay-3">
         <div class="offer-item-icon">📋</div>
         <div class="offer-item-title">Fixed-Price Estimate</div>
-        <div class="offer-item-body">No surprises. After your free assessment, you get a clear written estimate — what you see is what you pay.</div>
+        <div class="offer-item-body">No surprises. Clear written estimate after your free assessment — what you see is what you pay.</div>
       </div>
     </div>
     <p class="offer-financing reveal delay-4">💳 Can't pay upfront? Financing available through Acorn — ask about monthly payment options.</p>
@@ -503,7 +504,7 @@
       <div class="section-label">Know the warning signs</div>
       <h2>6 Signs Your Panel<br><em>Needs Replacing</em></h2>
     </div>
-    <p class="section-desc">Modern homes demand far more power than panels built 20–30 years ago were designed to handle.</p>
+    <p class="section-desc">If your home was built before 2000, watch for these red flags.</p>
   </div>
   <div class="signs-grid">
     <div class="sign-card reveal delay-1"><div class="sign-card-number">01</div><h3 class="sign-card-title">Breakers That Won't Stay Reset</h3><p class="sign-card-body">A breaker that trips repeatedly means your panel can't safely handle your home's electrical load — it's working overtime to prevent a fire.</p><span class="sign-tag">⚠ High Risk</span></div>
@@ -523,7 +524,7 @@
     <div class="brands-content reveal-left">
       <div class="section-label">Known Hazardous Brands</div>
       <h2>Does Your Panel<br><em>Have One of These</em><br>Names on It?</h2>
-      <p style="color:rgba(250,246,239,0.6);font-size:0.95rem;line-height:1.7;font-weight:300;margin-top:16px;">These manufacturers have documented histories of panel failures and increased fire risk. Insurance companies are now actively flagging these brands.</p>
+      <p style="color:rgba(250,246,239,0.6);font-size:0.95rem;line-height:1.7;font-weight:300;margin-top:16px;">Insurance companies are actively flagging these brands. If you recognize one, schedule an inspection today.</p>
       <div class="brands-list">
         <div class="brand-row reveal delay-1"><div class="brand-icon">⚡</div><div><div class="brand-name">Federal Pacific Electric (FPE / Stab-Lok)</div><div class="brand-reason">Breakers fail to trip during overloads — still in millions of homes</div></div><span class="brand-badge">Recall Hazard</span></div>
         <div class="brand-row reveal delay-2"><div class="brand-icon">⚡</div><div><div class="brand-name">Zinsco / GTE-Sylvania</div><div class="brand-reason">Bus bars melt and fuse to breakers, preventing safe tripping</div></div><span class="brand-badge">Fire Risk</span></div>
@@ -583,7 +584,7 @@
       <div class="section-label">Our Panel Upgrade Process</div>
       <h2>Turnkey. Hassle-Free.<br><em>Done Right.</em></h2>
     </div>
-    <p class="section-desc">We handle every aspect — city, county, utility coordination, permits, installation, and restoration. You don't lift a finger.</p>
+    <p class="section-desc">We handle city, county, utility coordination, permits, installation, and restoration. You don't lift a finger.</p>
   </div>
   <div class="process-grid">
     <div class="process-step reveal delay-1"><div class="step-num">01</div><span class="step-icon">📞</span><div class="step-title">Free Consultation</div><p class="step-body">Call or schedule online. We'll discuss your home's needs, current panel, and any concerns — no cost, no pressure.</p></div>
@@ -628,24 +629,24 @@
     </div>
   </div>
   <div class="reviews-grid">
-    <div class="review-card reveal delay-1">
+    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-1">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"I have worked with Chris Jones for years and he checks every box a contractor should. He is very detailed, extremely knowledgeable in not only electrical work but construction in general."</p>
+      <p class="review-text">"Chris checks every box a contractor should. Very detailed, extremely knowledgeable in electrical work and construction."</p>
       <div class="review-author">Brent McFarland</div>
       <div class="review-date">Jul 2025</div>
-    </div>
-    <div class="review-card reveal delay-2">
+    </a>
+    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-2">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Can't recommend Chris and his team enough. They built our ADU and everyone he brought on was awesome. Wouldn't use anyone else for our electrical needs."</p>
+      <p class="review-text">"Can't recommend Chris and his team enough. They built our ADU and everyone he brought on was awesome. Wouldn't use anyone else."</p>
       <div class="review-author">Holly Granquist</div>
       <div class="review-date">Jul 2025</div>
-    </div>
-    <div class="review-card reveal delay-3">
+    </a>
+    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-3">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"I've used Copper Crest Electric on three different occasions — from installing recessed lighting and fixtures to upgrading my electrical panel. Highly recommend."</p>
+      <p class="review-text">"I've used Copper Crest on three different occasions — from recessed lighting to upgrading my electrical panel. Highly recommend."</p>
       <div class="review-author">Dejinira Lee</div>
       <div class="review-date">Jun 2025</div>
-    </div>
+    </a>
   </div>
   <div class="reviews-cta reveal">
     <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824,1186m/data=!3m2!1e3!4b1!4m6!3m5!1s0x820b5099714a0a99:0x4507acd41a2163a!8m2!3d33.2940497!4d-117.2275824!16s%2Fg%2F11y434hwgh" target="_blank" rel="noopener" class="reviews-link">See all reviews on Google →</a>
@@ -659,19 +660,19 @@
   <div class="section-label reveal" style="justify-content:center;">Common questions</div>
   <h2 class="reveal" style="text-align:center;margin-bottom:40px;">Frequently Asked<br><em>Questions</em></h2>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>How much does a panel upgrade cost?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Our panel upgrades start at $3,499. The final price depends on your service size, panel configuration, code requirements, and home specifics. After your free on-site assessment, you'll receive a clear, fixed-price estimate with no hidden fees.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>How much does a panel upgrade cost?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Starting at $3,499. Final price depends on your service size and panel configuration. You'll get a clear, fixed-price estimate after your free assessment — no hidden fees.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>How long does a panel upgrade take?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>The installation itself is typically completed in a single day. However, the overall timeline includes permit coordination with your city or county and scheduling a utility shutdown, which can take several weeks. We manage the entire process so you don't have to.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>How long does it take?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Installation is typically one day. The full timeline includes permit and utility coordination, which can take several weeks. We manage everything.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>Will my insurance be reinstated after the upgrade?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>In most cases, yes. Once the new panel passes inspection and is code-certified, we provide documentation you can send to your insurer. Most carriers reinstate coverage once they receive proof of the upgrade.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>Will my insurance be reinstated?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>In most cases, yes. Once your panel passes inspection, we provide documentation for your insurer. Most carriers reinstate coverage once they receive proof.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>What's included in "turnkey"?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>We handle everything other electricians don't — city and county coordination, utility work orders, permits, the actual installation, plus trenching, grading, and siding repair to make sure your home looks as good as when we arrived. You get one point of contact for the entire project.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>What does "turnkey" mean?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>We handle everything — permits, city/county coordination, utility work orders, installation, plus trenching, grading, and siding repair. One point of contact, start to finish.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>Do you offer financing?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Yes. We offer financing through Acorn so you can spread the cost into manageable monthly payments. Ask us about available options during your free assessment.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>Do you offer financing?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Yes — through Acorn. Spread the cost into monthly payments. Ask during your free assessment.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>What warranty do you offer?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Every installation comes with a 1-year workmanship warranty from Copper Crest Electric. All materials are additionally covered by their manufacturer warranties. If any issue arises from our work, we come back and fix it at no cost.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>What warranty do you offer?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>1-year workmanship warranty from Copper Crest, plus manufacturer warranties on all materials. If anything goes wrong from our work, we fix it free.</p></div></div>
 
-  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>My insurer sent me a letter. How fast can you move?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>We understand the urgency. Contact us immediately and we'll prioritize your assessment. While permits and utility coordination take time, we work to move as fast as possible within your insurer's deadline. The sooner you call, the more time we have.</p></div></div>
+  <div class="qa-item reveal"><div class="qa-question" onclick="this.parentElement.classList.toggle('open')"><span>I got an insurance letter. How fast can you move?</span><span class="qa-toggle">+</span></div><div class="qa-answer"><p>Call us immediately. We'll prioritize your assessment and move as fast as possible within your deadline. The sooner you call, the more time we have.</p></div></div>
 </section>
 
 <!-- ════════════════════════════════ -->
@@ -778,7 +779,7 @@
     entries.forEach(entry => {
       entry.target.classList.toggle('visible', entry.isIntersecting);
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   revealEls.forEach(el => observer.observe(el));
 
   // COUNT-UP NUMBERS
