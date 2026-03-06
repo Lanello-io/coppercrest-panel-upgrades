@@ -59,20 +59,10 @@
   .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
 
   /* NAV */
-nav { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 100; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between;
-  padding: 12px 24px;
-} 
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 48px; background: rgba(15,13,46,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(181,101,29,0.2); transition: padding 0.3s; }
   nav.scrolled { padding: 10px 48px; background: rgba(15,13,46,0.95); }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo img { height: 48px; width: auto; }
+  .nav-logo img { height: 44px; width: auto; }
   .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.12em; color: var(--copper-bright); }
   .nav-logo-text span { color: var(--cream); }
   .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--copper); color: var(--white); padding: 10px 22px; border-radius: 3px; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s, transform 0.15s; }
@@ -383,7 +373,7 @@ nav {
       <!-- SPOTS COUNTER — edit the number below to update available slots -->
       <div class="spots-counter">
         <span class="lock-icon">🔒</span>
-        <span class="spots-text">Only <span class="spots-num" id="spotsNum">8</span> spots remaining. Book now to secure your slot</span>
+        <span class="spots-text">Only <span class="spots-num" id="spotsNum">8</span> spots remaining — book now to secure your slot</span>
       </div>
       <div class="form-card-title">
         <div class="icon">⚠</div>
