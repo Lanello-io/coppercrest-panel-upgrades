@@ -97,7 +97,7 @@
   .hero-form-wrap { position: relative; z-index: 2; padding: 60px 80px 60px 20px; animation: fadeUp 0.9s 0.3s ease both; }
   .form-card { background: linear-gradient(145deg, rgba(45,42,110,0.6), rgba(15,13,46,0.8)); border: 1px solid rgba(181,101,29,0.25); border-radius: 8px; padding: 32px; backdrop-filter: blur(10px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(181,101,29,0.15); }
   .form-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--copper-glow); margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
-  .form-card-title .icon { width: 28px; height: 28px; background: rgba(192,57,43,0.2); border: 1px solid rgba(231,76,60,0.4); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+  .form-card-title .icon{width:28px;height:28px;min-width:28px;flex-shrink:0;background:rgba(192,57,43,0.2);border:1px solid rgba(231,76,60,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.9rem;line-height:1;transform:translateY(-1px)}
   .form-card-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 300; }
   .form-trust { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.72rem; color: var(--text-muted); }
 
@@ -131,7 +131,7 @@
   /* COST TABLE */
   .cost-section { position: relative; z-index: 2; padding: 100px 80px; max-width: 1400px; margin: 0 auto; }
   .cost-table-wrap { overflow-x: auto; margin-top: 48px; border-radius: 12px; border: 1px solid rgba(181,101,29,0.2); background: rgba(15,13,46,0.5); }
-  .cost-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  .im gonncost-table { width: 100%; border-collapse: collapse; min-width: 900px; }
   .cost-table thead th { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper-glow); padding: 20px 24px; text-align: left; border-bottom: 2px solid rgba(181,101,29,0.3); background: rgba(45,42,110,0.3); white-space: nowrap; }
   .cost-table tbody tr { transition: background 0.2s; }
   .cost-table tbody tr:hover { background: rgba(45,42,110,0.2); }
@@ -373,7 +373,7 @@
       <!-- SPOTS COUNTER — edit the number below to update available slots -->
       <div class="spots-counter">
         <span class="lock-icon">🔒</span>
-        <span class="spots-text">Only <span class="spots-num" id="spotsNum">8</span> spots remaining — book now to secure your slot</span>
+        <span class="spots-text">Only <span class="spots-num" id="spotsNum">8</span> spots remaining. Book now to secure your slot</span>
       </div>
       <div class="form-card-title">
         <div class="icon">⚠</div>
