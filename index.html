@@ -97,7 +97,7 @@
   .hero-form-wrap { position: relative; z-index: 2; padding: 60px 80px 60px 20px; animation: fadeUp 0.9s 0.3s ease both; }
   .form-card { background: linear-gradient(145deg, rgba(45,42,110,0.6), rgba(15,13,46,0.8)); border: 1px solid rgba(181,101,29,0.25); border-radius: 8px; padding: 32px; backdrop-filter: blur(10px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(181,101,29,0.15); }
   .form-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--copper-glow); margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
-  .form-card-title .icon{width:28px;height:28px;min-width:28px;flex-shrink:0;background:rgba(192,57,43,0.2);border:1px solid rgba(231,76,60,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.9rem;line-height:1;transform:translateY(-1px)}
+  .form-card-title .icon{width:28px;height:28px;min-width:28px;flex-shrink:0;background:rgba(192,57,43,0.2);border:1px solid rgba(231,76,60,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--copper-glow)} .form-card-title .icon svg{width:16px;height:16px;display:block}
   .form-card-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 300; }
   .form-trust { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.72rem; color: var(--text-muted); }
 
@@ -376,7 +376,13 @@
         <span class="spots-text">Only <span class="spots-num" id="spotsNum">8</span> spots remaining. Book now to secure your slot</span>
       </div>
       <div class="form-card-title">
-        <div class="icon">⚠</div>
+        <<div class="icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3L22 21H2L12 3Z"></path>
+    <path d="M12 9V13"></path>
+    <circle cx="12" cy="17" r="1"></circle>
+  </svg>
+</div>
         FREE ON-SITE ASSESSMENT (VALUED AT $150)
       </div>
 
