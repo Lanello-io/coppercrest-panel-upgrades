@@ -58,11 +58,11 @@
   .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
 
   /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 48px; background: rgba(15,13,46,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(181,101,29,0.2); transition: padding 0.3s; }
-  nav.scrolled { padding: 10px 48px; background: rgba(15,13,46,0.95); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(15,13,46,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(181,101,29,0.2); transition: padding 0.3s; }
+  nav.scrolled { padding: 12px 48px; background: rgba(15,13,46,0.95); }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo img { height: 44px; width: auto; }
-  .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.12em; color: var(--copper-bright); }
+  .nav-logo img { height: 56px; width: auto; }
+  .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.12em; color: var(--copper-bright); }
   .nav-logo-text span { color: var(--cream); }
   .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--copper); color: var(--white); padding: 10px 22px; border-radius: 3px; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s, transform 0.15s; }
   .nav-cta:hover { background: var(--copper-bright); transform: translateY(-1px); }
@@ -266,7 +266,7 @@
   /* CTA */
   .cta-section { position: relative; z-index: 2; padding: 80px; overflow: hidden; }
   .cta-inner { max-width: 1400px; margin: 0 auto; background: linear-gradient(135deg, rgba(181,101,29,0.2) 0%, rgba(45,42,110,0.4) 100%); border: 1px solid rgba(181,101,29,0.3); border-radius: 16px; padding: 80px; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; position: relative; overflow: hidden; }
-  .cta-inner::before { content: '⚡'; position: absolute; right: 200px; top: 50%; transform: translateY(-50%); font-size: 14rem; opacity: 0.04; pointer-events: none; }
+  .cta-inner::before { content: '⚡'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 14rem; opacity: 0.04; pointer-events: none; }
   .cta-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--cream); margin-bottom: 16px; }
   .cta-heading em { font-style: normal; color: var(--copper-glow); }
   .cta-sub { font-size: 1rem; color: rgba(250,246,239,0.65); font-weight: 300; max-width: 520px; line-height: 1.6; }
@@ -736,7 +736,11 @@
 <!-- FOOTER -->
 <footer class="reveal">
   <div>
-    <div class="footer-logo">COPPER CREST ELECTRIC</div>
+    <!-- Replace src with actual logo URL. Text fallback shows if image fails -->
+    <a href="https://coppercrestelectric.com" style="text-decoration:none;">
+      <img src="https://coppercrestelectric.com/wp-content/uploads/2024/01/copper-crest-logo.png" alt="Copper Crest Electric" style="height:48px;width:auto;margin-bottom:8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div class="footer-logo" style="display:none;">COPPER CREST ELECTRIC</div>
+    </a>
     <div class="footer-tagline">Crafting Excellence. Illuminating Your Vision.</div>
   </div>
   <div class="footer-contact">
