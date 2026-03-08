@@ -25,14 +25,13 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+  html { scroll-behavior: smooth; width: 100%; }
   body {
     background: var(--indigo-deep);
     color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
     width: 100%;
-    max-width: 100vw;
   }
 
   /* NOISE */
@@ -69,7 +68,7 @@
   .nav-cta:hover { background: var(--copper-bright); transform: translateY(-1px); }
 
   /* HERO */
-  .hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden; padding: 90px 0 60px; }
+  .hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 90px 0 60px; }
   .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(181,101,29,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 80% at 20% 30%, rgba(45,42,110,0.8) 0%, transparent 70%), linear-gradient(160deg, var(--indigo-deep) 0%, #1a1640 100%); }
   .warning-stripe { position: absolute; top: 60px; left: 0; right: 0; height: 4px; background: repeating-linear-gradient(90deg, var(--danger-bright) 0px, var(--danger-bright) 20px, transparent 20px, transparent 30px); animation: stripeScroll 3s linear infinite; }
   @keyframes stripeScroll { from { background-position: 0 0; } to { background-position: 60px 0; } }
@@ -96,9 +95,10 @@
   /* HERO FORM */
   .hero-form-wrap { position: relative; z-index: 2; padding: 60px 80px 60px 20px; animation: fadeUp 0.9s 0.3s ease both; }
   .form-card { background: linear-gradient(145deg, rgba(45,42,110,0.6), rgba(15,13,46,0.8)); border: 1px solid rgba(181,101,29,0.25); border-radius: 8px; padding: 32px; backdrop-filter: blur(10px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(181,101,29,0.15); }
-  .form-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--copper-glow); margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
+  .form-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--copper-glow); margin-bottom: 0; display: flex; align-items: center; gap: 10px; }
   .form-card-title .icon{width:28px;height:28px;min-width:28px;flex-shrink:0;background:rgba(192,57,43,0.2);border:1px solid rgba(231,76,60,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--copper-glow)} .form-card-title .icon svg{width:16px;height:16px;display:block}
-  .form-card-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 300; }
+  .form-card-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 300; }
+  .form-card iframe { border: none !important; display: block; }
   .form-trust { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.72rem; color: var(--text-muted); }
 
   /* SPOTS COUNTER */
@@ -130,8 +130,8 @@
 
   /* COST TABLE */
   .cost-section { position: relative; z-index: 2; padding: 100px 80px; max-width: 1400px; margin: 0 auto; }
-  .cost-table-wrap { overflow-x: auto; margin-top: 48px; border-radius: 12px; border: 1px solid rgba(181,101,29,0.2); background: rgba(15,13,46,0.5); }
-  .im gonncost-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  .cost-table-wrap { overflow-x: auto; overflow-y: visible; margin-top: 48px; border-radius: 12px; border: 1px solid rgba(181,101,29,0.2); background: rgba(15,13,46,0.5); max-width: 100%; }
+  .cost-table { width: 100%; border-collapse: collapse; }
   .cost-table thead th { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper-glow); padding: 20px 24px; text-align: left; border-bottom: 2px solid rgba(181,101,29,0.3); background: rgba(45,42,110,0.3); white-space: nowrap; }
   .cost-table tbody tr { transition: background 0.2s; }
   .cost-table tbody tr:hover { background: rgba(45,42,110,0.2); }
@@ -164,7 +164,7 @@
   .sign-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--copper), var(--copper-glow)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
   .sign-card:hover { border-color: rgba(181,101,29,0.4); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
   .sign-card:hover::before { transform: scaleX(1); }
-  .sign-card-number { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(181,101,29,0.15); line-height: 1; margin-bottom: -10px; }
+  .sign-card-number { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: #f0a050; opacity: 0.35; line-height: 1; margin-bottom: -10px; }
   .sign-card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--cream); font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
   .sign-card-body { font-size: 0.85rem; line-height: 1.65; color: rgba(250,246,239,0.6); font-weight: 300; }
   .sign-tag { display: inline-block; margin-top: 16px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--danger-bright); background: rgba(192,57,43,0.15); border-radius: 2px; padding: 4px 10px; }
@@ -203,7 +203,7 @@
   .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 60px; background: rgba(181,101,29,0.1); border-radius: 8px; overflow: hidden; }
   .process-step { background: var(--indigo-deep); padding: 40px 32px; position: relative; transition: background 0.3s; }
   .process-step:hover { background: rgba(45,42,110,0.5); }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(181,101,29,0.2); line-height: 1; margin-bottom: 16px; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: #f0a050; opacity: 0.35; line-height: 1; margin-bottom: 16px; }
   .step-icon { font-size: 1.8rem; margin-bottom: 16px; display: block; }
   .step-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; margin-bottom: 12px; }
   .step-body { font-size: 0.83rem; line-height: 1.6; color: rgba(250,246,239,0.55); font-weight: 300; }
@@ -211,7 +211,7 @@
   /* GALLERY */
   .gallery-section { position: relative; z-index: 2; padding: 80px; background: rgba(45,42,110,0.15); border-top: 1px solid rgba(181,101,29,0.1); }
   .gallery-inner { max-width: 1400px; margin: 0 auto; }
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
   .gallery-item { aspect-ratio: 1; background: linear-gradient(135deg, rgba(45,42,110,0.4), rgba(15,13,46,0.6)); border: 1px solid rgba(181,101,29,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-muted); overflow: hidden; }
   .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -385,7 +385,6 @@
 </div>
         FREE ON-SITE ASSESSMENT (VALUED AT $150)
       </div>
-
       <!-- GHL FORM EMBED -->
       <iframe
         src="https://links.coppercrestelectric.com/widget/form/d146qY0LXqD9KkQkktcg"
@@ -444,22 +443,18 @@
 <!-- 2. COST COMPARISON TABLE   -->
 <!-- ════════════════════════════ -->
 <section class="cost-section">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">The real cost of waiting</div>
-      <h2>What Your Panel Decision<br><em>Actually Costs You</em></h2>
-    </div>
-    <p class="section-desc">The upgrade starts at $3,499. The alternative is paying more...</p>
+  <div class="reveal" style="margin-bottom:48px;">
+    <div class="section-label">The real cost of waiting</div>
+    <h2>What Your Panel Decision<br><em>Actually Costs You</em></h2>
+    <p class="section-desc" style="margin-top:16px;">The upgrade starts at $3,499. The alternative is paying more — sometimes catastrophically more.</p>
   </div>
   <div class="cost-table-wrap reveal delay-2">
     <table class="cost-table">
       <thead><tr><th>Your Situation</th><th>What You Pay</th><th>Insurance Cost</th><th>Total Cost</th><th>What You're Risking</th></tr></thead>
       <tbody>
-        <tr><td class="situation-cell">✅ Act now. Planned upgrade</td><td>$3,499–$5,500</td><td>~$1,400/yr standard</td><td>~$6,300–$8,300 over 2 yrs</td><td style="color:#22c55e;">Nothing. Insured & Protected.</td></tr>
-        <tr><td class="situation-cell">⏰ Wait until forced</td><td>$6,000–$9,000+</td><td>~$1,400/yr standard</td><td>~$8,300–$11,800</td><td class="risk-cell">Same result, 40–60% more under deadline pressure</td></tr>
+        <tr><td class="situation-cell">✅ Act now — planned upgrade</td><td>$3,499–$5,500</td><td>~$1,400/yr standard</td><td>~$6,300–$8,300 over 2 yrs</td><td style="color:#22c55e;">Nothing. Insured & Protected.</td></tr>
         <tr><td class="situation-cell">😬 Pushed to FAIR Plan</td><td>$0 now</td><td>~$3,200/yr FAIR Plan</td><td>~$6,400+/yr less coverage</td><td class="risk-cell">Paying more for less, every month, forever</td></tr>
-        <tr><td class="situation-cell">🔥 Fire. Uninsured</td><td>$0 now</td><td class="risk-cell danger">Claim denied</td><td>$8,000–$75,000</td><td class="risk-cell danger">You paid premiums for years. They don't pay.</td></tr>
-        <tr><td class="situation-cell">💀 Total loss. Uninsured</td><td>$0 now</td><td class="risk-cell danger">Claim denied</td><td class="risk-cell danger">$200,000–$600,000+</td><td class="risk-cell danger">Mortgage still exists. House doesn't.</td></tr>
+        <tr><td class="situation-cell">🔥 Fire or total loss — uninsured</td><td>$0 now</td><td class="risk-cell danger">Claim denied</td><td class="risk-cell danger">$8,000–$600,000+</td><td class="risk-cell danger">Mortgage still exists. House might not. They don't pay.</td></tr>
       </tbody>
     </table>
   </div>
@@ -512,12 +507,12 @@
     <p class="section-desc">If your home was built before 2000, watch for these red flags.</p>
   </div>
   <div class="signs-grid">
-    <div class="sign-card reveal delay-1"><div class="sign-card-number">01</div><h3 class="sign-card-title">Breakers That Won't Stay Reset</h3><p class="sign-card-body">A breaker that trips repeatedly means your panel can't safely handle your home's electrical load — it's working overtime to prevent a fire.</p><span class="sign-tag">⚠ High Risk</span></div>
-    <div class="sign-card reveal delay-2"><div class="sign-card-number">02</div><h3 class="sign-card-title">The Panel Is Warm to the Touch</h3><p class="sign-card-body">Heat radiating from your panel indicates loose connections, overloaded circuits, or internal arcing — all potential fire starters.</p><span class="sign-tag">⚠ Critical</span></div>
-    <div class="sign-card reveal delay-3"><div class="sign-card-number">03</div><h3 class="sign-card-title">You Have a Recalled Brand</h3><p class="sign-card-body">Federal Pacific, Zinsco, and Pushmatic panels have known safety defects. If you have one, it needs immediate replacement.</p><span class="sign-tag">⚠ Urgent</span></div>
-    <div class="sign-card reveal delay-1"><div class="sign-card-number">04</div><h3 class="sign-card-title">Only 100-Amp Service</h3><p class="sign-card-body">Today's homes need 200 amps minimum for EVs, solar, and whole-home AC. An undersized panel can become dangerously overloaded.</p><span class="sign-tag">⚠ Capacity Issue</span></div>
-    <div class="sign-card reveal delay-2"><div class="sign-card-number">05</div><h3 class="sign-card-title">Fuse Box Instead of Breakers</h3><p class="sign-card-body">If your home uses screw-in fuses, you have one of the oldest electrical systems possible — a major safety and insurance liability.</p><span class="sign-tag">⚠ Replace Now</span></div>
-    <div class="sign-card reveal delay-3"><div class="sign-card-number">06</div><h3 class="sign-card-title">Lights Dim When Appliances Run</h3><p class="sign-card-body">Voltage sags when your dryer kicks on? Your panel is struggling to distribute power. This worsens over time.</p><span class="sign-tag">⚠ Performance</span></div>
+    <div class="sign-card reveal delay-1"><div class="sign-card-number">01</div><h3 class="sign-card-title">Breakers That Won't Stay Reset</h3><p class="sign-card-body">Trips repeatedly? Your panel can't handle the load — fire risk.</p><span class="sign-tag">⚠ High Risk</span></div>
+    <div class="sign-card reveal delay-2"><div class="sign-card-number">02</div><h3 class="sign-card-title">Panel Is Warm to the Touch</h3><p class="sign-card-body">Heat means loose connections or internal arcing — potential fire starter.</p><span class="sign-tag">⚠ Critical</span></div>
+    <div class="sign-card reveal delay-3"><div class="sign-card-number">03</div><h3 class="sign-card-title">You Have a Recalled Brand</h3><p class="sign-card-body">FPE, Zinsco, Pushmatic — known defects, needs immediate replacement.</p><span class="sign-tag">⚠ Urgent</span></div>
+    <div class="sign-card reveal delay-1"><div class="sign-card-number">04</div><h3 class="sign-card-title">Only 100-Amp Service</h3><p class="sign-card-body">Modern homes need 200A for EVs, solar, AC. Undersized = overloaded.</p><span class="sign-tag">⚠ Capacity Issue</span></div>
+    <div class="sign-card reveal delay-2"><div class="sign-card-number">05</div><h3 class="sign-card-title">Fuse Box Instead of Breakers</h3><p class="sign-card-body">Screw-in fuses = oldest system possible. Major safety & insurance liability.</p><span class="sign-tag">⚠ Replace Now</span></div>
+    <div class="sign-card reveal delay-3"><div class="sign-card-number">06</div><h3 class="sign-card-title">Lights Dim When Appliances Run</h3><p class="sign-card-body">Voltage sags = panel struggling to distribute power. Gets worse over time.</p><span class="sign-tag">⚠ Performance</span></div>
   </div>
 </section>
 
@@ -573,8 +568,7 @@
         <div class="worst-stat-text">The upgrade pays for itself in avoided premium increases alone. Even the FAIR Plan — the insurer of last resort — costs 2–3x normal.</div>
       </div>
     </div>
-    <p class="worst-quote reveal delay-5">"Your panel is a $3,499 decision that becomes a $400,000 problem if you wait — and your insurer already sent you the warning."</p>
-    <div style="margin-top:32px;" class="reveal delay-6">
+    <div style="margin-top:32px;" class="reveal delay-5">
       <a href="#heroForm" class="btn-primary">⚡ Don't Wait — Get Your Free Assessment</a>
     </div>
   </div>
@@ -592,10 +586,10 @@
     <p class="section-desc">We handle city, county, utility coordination, permits, installation, and restoration. You don't lift a finger.</p>
   </div>
   <div class="process-grid">
-    <div class="process-step reveal delay-1"><div class="step-num">01</div><span class="step-icon">📞</span><div class="step-title">Free Consultation</div><p class="step-body">Call or schedule online. We'll discuss your home's needs, current panel, and any concerns — no cost, no pressure.</p></div>
-    <div class="process-step reveal delay-2"><div class="step-num">02</div><span class="step-icon">🔍</span><div class="step-title">On-Site Assessment</div><p class="step-body">A licensed electrician visits your home, assesses your electrical system, measurements, and documentation. You get a clear, fixed-price estimate.</p></div>
-    <div class="process-step reveal delay-3"><div class="step-num">03</div><span class="step-icon">🛠</span><div class="step-title">Permits & Installation</div><p class="step-body">We coordinate with the utility, pull permits, schedule the shutdown, replace everything, and call for inspection. We also handle trenching, grading, and siding repair.</p></div>
-    <div class="process-step reveal delay-4"><div class="step-num">04</div><span class="step-icon">✅</span><div class="step-title">Inspection & Power On</div><p class="step-body">After passing inspection, the utility restores power. Your panel is code-certified and backed by our 1-year workmanship warranty.</p></div>
+    <div class="process-step reveal delay-1"><div class="step-num">01</div><span class="step-icon">📞</span><div class="step-title">Free Consultation</div><p class="step-body">Call or schedule online. We discuss your needs and concerns — no cost, no pressure.</p></div>
+    <div class="process-step reveal delay-2"><div class="step-num">02</div><span class="step-icon">🔍</span><div class="step-title">On-Site Assessment</div><p class="step-body">Licensed electrician assesses your system on-site. You get a clear, fixed-price estimate.</p></div>
+    <div class="process-step reveal delay-3"><div class="step-num">03</div><span class="step-icon">🛠</span><div class="step-title">Permits & Installation</div><p class="step-body">We coordinate utility, pull permits, replace everything. Trenching, grading, siding repair included.</p></div>
+    <div class="process-step reveal delay-4"><div class="step-num">04</div><span class="step-icon">✅</span><div class="step-title">Inspection & Power On</div><p class="step-body">Passes inspection, utility restores power. Code-certified. 1-year workmanship warranty.</p></div>
   </div>
 </section>
 
@@ -611,11 +605,9 @@
       <div class="gallery-item reveal delay-1">📷 Photo 1</div>
       <div class="gallery-item reveal delay-2">📷 Photo 2</div>
       <div class="gallery-item reveal delay-3">📷 Photo 3</div>
-      <div class="gallery-item reveal delay-4">📷 Photo 4</div>
-      <div class="gallery-item reveal delay-1">📷 Photo 5</div>
-      <div class="gallery-item reveal delay-2">📷 Photo 6</div>
-      <div class="gallery-item reveal delay-3">📷 Photo 7</div>
-      <div class="gallery-item reveal delay-4">📷 Photo 8</div>
+      <div class="gallery-item reveal delay-1">📷 Photo 4</div>
+      <div class="gallery-item reveal delay-2">📷 Photo 5</div>
+      <div class="gallery-item reveal delay-3">📷 Photo 6</div>
     </div>
   </div>
 </section>
@@ -634,19 +626,19 @@
     </div>
   </div>
   <div class="reviews-grid">
-    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-1">
+    <a href="https://maps.app.goo.gl/yHt85hgtkGx9mwiv6" target="_blank" rel="noopener" class="review-card reveal delay-1">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">"Chris checks every box a contractor should. Very detailed, extremely knowledgeable in electrical work and construction."</p>
       <div class="review-author">Brent McFarland</div>
       <div class="review-date">Jul 2025</div>
     </a>
-    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-2">
+    <a href="https://maps.app.goo.gl/HC2JvhifF35XQRDJA" target="_blank" rel="noopener" class="review-card reveal delay-2">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">"Can't recommend Chris and his team enough. They built our ADU and everyone he brought on was awesome. Wouldn't use anyone else."</p>
       <div class="review-author">Holly Granquist</div>
       <div class="review-date">Jul 2025</div>
     </a>
-    <a href="https://www.google.com/maps/place/Copper+Crest+Electric/@33.2940497,-117.2275824" target="_blank" rel="noopener" class="review-card reveal delay-3">
+    <a href="https://maps.app.goo.gl/qdWtZ7ToAonyPBvJ7" target="_blank" rel="noopener" class="review-card reveal delay-3">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">"I've used Copper Crest on three different occasions — from recessed lighting to upgrading my electrical panel. Highly recommend."</p>
       <div class="review-author">Dejinira Lee</div>
@@ -691,19 +683,16 @@
       <a href="https://coppercrestelectric.com/blog/how-to-update-electrical-panel" class="blog-card reveal delay-1" target="_blank">
         <div class="blog-card-label">Guide</div>
         <div class="blog-card-title">How to Update Your Electrical Panel</div>
-        <div class="blog-card-body">Everything you need to know about upgrading your home's electrical panel — costs, timeline, and what to expect.</div>
         <span class="blog-card-link">Read more →</span>
       </a>
       <a href="https://coppercrestelectric.com/blog/insurance-companies-canceling-for-panels" class="blog-card reveal delay-2" target="_blank">
         <div class="blog-card-label">Insurance</div>
         <div class="blog-card-title">Which Insurance Companies Cancel for Electrical Panels in California?</div>
-        <div class="blog-card-body">State Farm, Farmers, Allstate, USAA, and Mercury are actively sending non-renewal letters. Here's what you need to know.</div>
         <span class="blog-card-link">Read more →</span>
       </a>
       <a href="https://coppercrestelectric.com/blog/fpe-zinsco-pushmatic-panels" class="blog-card reveal delay-3" target="_blank">
         <div class="blog-card-label">Safety</div>
         <div class="blog-card-title">FPE, Zinsco, Pushmatic — What Do I Do Now?</div>
-        <div class="blog-card-body">If your home has one of these panels, here's exactly what's happening, why it matters, and your next steps.</div>
         <span class="blog-card-link">Read more →</span>
       </a>
     </div>
